@@ -16,7 +16,7 @@ with open(f, 'w') as file:
     file.write(content)
 print("Patched constants.py!")
 
-# Fix 2: Patch resume_parser.py to use en_core_web_sm instead of custom model
+# Fix 2: Patch resume_parser.py to use en_core_web_sm
 f2 = os.path.join(pyresparser_dir, 'resume_parser.py')
 with open(f2, 'r') as file:
     content2 = file.read()
@@ -27,3 +27,15 @@ content2 = content2.replace(
 with open(f2, 'w') as file:
     file.write(content2)
 print("Patched resume_parser.py!")
+
+# Fix 3: Patch utils.py for spacy v3 matcher.add() API change
+f3 = os.path.join(pyresparser_dir, 'utils.py')
+with open(f3, 'r') as file:
+    content3 = file.read()
+content3 = content3.replace(
+    "matcher.add('NAME', None, *pattern)",
+    "matcher.add('NAME', [pattern])"
+)
+with open(f3, 'w') as file:
+    file.write(content3)
+print("Patched utils.py!")
