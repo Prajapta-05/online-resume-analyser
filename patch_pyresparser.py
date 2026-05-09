@@ -28,13 +28,19 @@ with open(f2, 'w') as file:
     file.write(content2)
 print("Patched resume_parser.py!")
 
-# Fix 3: Patch utils.py for spacy v3 matcher.add() API change
+# Fix 3: Patch utils.py for spacy v3 matcher API
 f3 = os.path.join(pyresparser_dir, 'utils.py')
 with open(f3, 'r') as file:
     content3 = file.read()
+
+# Fix the matcher.add call and the pattern format
 content3 = content3.replace(
     "matcher.add('NAME', None, *pattern)",
-    "matcher.add('NAME', [pattern])"
+    "matcher.add('NAME', [list(pattern)])"
+)
+content3 = content3.replace(
+    "matcher.add('NAME', [pattern])",
+    "matcher.add('NAME', [list(pattern)])"
 )
 with open(f3, 'w') as file:
     file.write(content3)
