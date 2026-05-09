@@ -17,9 +17,10 @@ import spacy
 nlp = spacy.load("en_core_web_sm")
 import plotly.express as px #to create visualisations at the admin session
 import nltk
-import os
-nltk.data.path.append('/opt/render/nltk_data')
-nltk.download('stopwords', download_dir='/opt/render/nltk_data')
+nltk.data.path.append('/usr/local/share/nltk_data')
+nltk.download('stopwords', download_dir='/usr/local/share/nltk_data', quiet=True)
+nltk.download('punkt', download_dir='/usr/local/share/nltk_data', quiet=True)
+nltk.download('averaged_perceptron_tagger', download_dir='/usr/local/share/nltk_data', quiet=True)
 from yt_dlp import YoutubeDL
 
 def fetch_yt_video(link):
