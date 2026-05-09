@@ -100,13 +100,18 @@ def course_recommender(course_list):
 # CONNECT TO DATABASE
 import os
 
-connection = pymysql.connect(
-    host=os.environ.get('DB_HOST', 'localhost'),
-    user=os.environ.get('DB_USER', 'root'),
-    password=os.environ.get('DB_PASSWORD', 'password'),
-    db=os.environ.get('DB_NAME', 'cv')
-)
-cursor = connection.cursor()
+try:
+    connection = pymysql.connect(
+        host=os.environ.get('DB_HOST', 'localhost'),
+        user=os.environ.get('DB_USER', 'root'),
+        password=os.environ.get('DB_PASSWORD', 'password'),
+        db=os.environ.get('DB_NAME', 'cv')
+    )
+    cursor = connection.cursor()
+except Exception as e:
+    connection = None
+    cursor = None
+    print(f"Database connection failed: {e}")
 
 
 def insert_data(name, email, res_score, timestamp, no_of_pages, reco_field, cand_level, skills, recommended_skills,
