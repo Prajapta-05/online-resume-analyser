@@ -136,9 +136,7 @@ def run():
     activities = ["User", "Admin"]
     choice = st.sidebar.selectbox("Choose among the given options:", activities)
 
-    # Create the DB
-    db_sql = """CREATE DATABASE IF NOT EXISTS CV;"""
-    cursor.execute(db_sql)
+
 
     # Create table
     DB_table_name = 'user_data'
