@@ -16,12 +16,16 @@ from Courses import ds_course,web_course,android_course,ios_course,uiux_course,r
 import spacy
 nlp = spacy.load("en_core_web_sm")
 import plotly.express as px #to create visualisations at the admin session
-import nltk
 import os
-nltk.data.path.insert(0, os.path.join(os.path.dirname(__file__), 'nltk_data'))
-nltk.download('stopwords', download_dir='./nltk_data', quiet=True)
-nltk.download('punkt', download_dir='./nltk_data', quiet=True)
-nltk.download('averaged_perceptron_tagger', download_dir='./nltk_data', quiet=True)
+import nltk
+# Add all possible paths
+for p in [
+    '/opt/render/project/src/nltk_data',
+    os.path.expanduser('~/nltk_data'),
+    './nltk_data'
+]:
+    if p not in nltk.data.path:
+        nltk.data.path.insert(0, p)
 from yt_dlp import YoutubeDL
 
 def fetch_yt_video(link):
